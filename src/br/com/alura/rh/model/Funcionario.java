@@ -14,6 +14,9 @@ public class Funcionario {
 	private BigDecimal salario;
 	private LocalDate dataUltimoReajuste;
 
+	public Funcionario() {
+	}
+
 	public Funcionario(String nome, String cpf, Cargo cargo, BigDecimal salario) {
 		this.nome = nome;
 		this.cpf = cpf;
