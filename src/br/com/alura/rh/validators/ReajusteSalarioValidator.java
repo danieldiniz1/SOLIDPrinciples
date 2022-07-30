@@ -6,7 +6,5 @@ import java.math.BigDecimal;
 
 public interface ReajusteSalarioValidator {
 
-    Boolean percentualDeReajusteIsValid(BigDecimal valorAumento);
-
-    Boolean dataReajusteIsValid(Funcionario funcionario);
+    void IsValid(Funcionario funcionario, BigDecimal percentualAumento);
 }

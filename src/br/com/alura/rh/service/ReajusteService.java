@@ -4,26 +4,21 @@ import br.com.alura.rh.model.Funcionario;
 import br.com.alura.rh.validators.ReajusteSalarioValidator;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ReajusteService {
 
-    private ReajusteSalarioValidator reajusteSalarioValidator;
+    private List<ReajusteSalarioValidator> validacoes;
+
+    public ReajusteService(List<ReajusteSalarioValidator> validacoes) {
+        this.validacoes = validacoes;
+    }
 
     public void reajustarSalarioDoFuncionario(Funcionario funcionario, BigDecimal valorAumento){
-
-        reajusteSalarioValidator.percentualDeReajusteIsValid(valorAumento);
-        reajusteSalarioValidator.dataReajusteIsValid(funcionario);
+        this.validacoes.forEach(v -> v.IsValid(funcionario, valorAumento));
 
         BigDecimal salarioAtual = funcionario.getSalario();
         BigDecimal salarioAtualizado = salarioAtual.multiply(valorAumento.add(BigDecimal.ONE));
         funcionario.atualizarSalario(salarioAtualizado);
-    }
-
-    public ReajusteSalarioValidator getReajusteSalarioValidator() {
-        return reajusteSalarioValidator;
-    }
-
-    public void setReajusteSalarioValidator(ReajusteSalarioValidator reajusteSalarioValidator) {
-        this.reajusteSalarioValidator = reajusteSalarioValidator;
     }
 }
